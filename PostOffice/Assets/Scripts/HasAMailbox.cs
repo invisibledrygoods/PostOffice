@@ -27,8 +27,6 @@ public class HasAMailbox : MonoBehaviour
 
         foreach (string letter in letters)
         {
-            Debug.Log("matching " + pattern + " against " + letter);
-
             if (Regex.Replace(letter, @"-?[0-9]+(?:\.[0-9]+)?", "__") == pattern)
             {
                 List<float> args = new List<float>();

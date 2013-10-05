@@ -25,24 +25,19 @@ public class HasAMailbox : MonoBehaviour
 
         foreach (string letter in letters)
         {
-            MatchCollection matches = Regex.Matches(letter, pattern.Replace("__", @"-?[0-9]+(?:\.[0-9]+)?"));
-
-            if (matches.Count > 0)
+            if (Regex.Replace(letter, @"-?[0-9]+(?:\.[0-9]+)?", "__") == pattern)
             {
-                if (matches[0].Value == letter)
+                List<float> args = new List<float>();
+
+                foreach (Match match in Regex.Matches(Regex.Replace(letter, " ", "  "), @"(?:^| )(-?[0-9]+(?:\.[0-9]+)?)(?:$| )"))
                 {
-                    List<float> args = new List<float>();
-
-                    foreach (Match match in Regex.Matches(Regex.Replace(matches[0].Value, " ", "  "), @"(?:^| )(-?[0-9]+(?:\.[0-9]+)?)(?:$| )"))
-                    {
-                        string value = match.Value.Trim();
-                        args.Add(float.Parse(value));
-                    }
-
-                    handler(args.ToArray());
-
-                    return true;
+                    string value = match.Value.Trim();
+                    args.Add(float.Parse(value));
                 }
+
+                handler(args.ToArray());
+
+                return true;
             }
         }
 

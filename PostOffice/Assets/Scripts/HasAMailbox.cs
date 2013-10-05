@@ -10,29 +10,36 @@ public class HasAMailbox : MonoBehaviour
 
     public void Send(string letter)
     {
-        letters.Add(letter);
+        letters.Add(Regex.Replace(letter, @"\s+", " ").ToLower());
     }
 
-    public bool On(string pattern, Action<string[]> handler)
+    /// <summary>
+    /// Checks your mail.
+    /// </summary>
+    /// <param name="pattern">Letter to look for. Case and whitespace insensitive. Use __ as a fill in the blank for floats.</param>
+    /// <param name="handler">Function to call if a letter is found.</param>
+    /// <returns></returns>
+    public bool On(string pattern, Action<float[]> handler)
     {
+        pattern = Regex.Replace(pattern, @"\s+", " ").ToLower();
+
         foreach (string letter in letters)
         {
-            MatchCollection matches = Regex.Matches(letter, pattern);
+            MatchCollection matches = Regex.Matches(letter, pattern.Replace("__", @"-?[0-9]+(?:\.[0-9]+)?"));
 
             if (matches.Count > 0)
             {
                 if (matches[0].Value == letter)
                 {
-                    List<string> groups = new List<string>();
+                    List<float> args = new List<float>();
 
-                    foreach (Group group in matches[0].Groups)
+                    foreach (Match match in Regex.Matches(Regex.Replace(matches[0].Value, " ", "  "), @"(?:^| )(-?[0-9]+(?:\.[0-9]+)?)(?:$| )"))
                     {
-                        groups.Add(group.Value);
+                        string value = match.Value.Trim();
+                        args.Add(float.Parse(value));
                     }
 
-                    groups.RemoveAt(0);
-
-                    handler(groups.ToArray());
+                    handler(args.ToArray());
 
                     return true;
                 }

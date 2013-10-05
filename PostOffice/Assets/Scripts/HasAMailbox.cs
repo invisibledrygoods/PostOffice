@@ -23,6 +23,8 @@ public class HasAMailbox : MonoBehaviour
     {
         pattern = Regex.Replace(pattern, @"[^a-zA-Z0-9.-_]+", " ").ToLower();
 
+        string found = null;
+
         foreach (string letter in letters)
         {
             Debug.Log("matching " + pattern + " against " + letter);
@@ -39,8 +41,15 @@ public class HasAMailbox : MonoBehaviour
 
                 handler(args.ToArray());
 
-                return true;
+                found = letter;
+                break;
             }
+        }
+
+        if (found != null)
+        {
+            letters.Remove(found);
+            return true;
         }
 
         return false;

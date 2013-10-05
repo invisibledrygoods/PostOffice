@@ -21,6 +21,7 @@ public class HasAMailboxTest : TestBehaviour
         Given("it has a mailbox").And("it receives the letter 'hello'").When("it looks for a hello letter").Then("it should return 'True'");
         Given("it has a mailbox").And("it receives the letter 'goodbye'").When("it looks for a hello letter").Then("it should return 'False'");
         Given("it has a mailbox").And("it receives the letter 'have    some extra    spaces'").When("it looks for a letter without extra spaces").Then("it should return 'True'");
+        Given("it has a mailbox").And("it receives the letter 'hello'").When("it looks for a hello letter").And("it looks for a hello letter").Then("the hello handler should be run 1 times");
     }
 
     public void ItHasAMailbox()

@@ -10,7 +10,7 @@ public class HasAMailbox : MonoBehaviour
 
     public void Send(string letter)
     {
-        letters.Add(Regex.Replace(letter, @"\s+", " ").ToLower());
+        letters.Add(Regex.Replace(letter, @"[^a-zA-Z0-9.-]+", " ").ToLower());
     }
 
     /// <summary>
@@ -21,10 +21,12 @@ public class HasAMailbox : MonoBehaviour
     /// <returns></returns>
     public bool On(string pattern, Action<float[]> handler)
     {
-        pattern = Regex.Replace(pattern, @"\s+", " ").ToLower();
+        pattern = Regex.Replace(pattern, @"[^a-zA-Z0-9.-_]+", " ").ToLower();
 
         foreach (string letter in letters)
         {
+            Debug.Log("matching " + pattern + " against " + letter);
+
             if (Regex.Replace(letter, @"-?[0-9]+(?:\.[0-9]+)?", "__") == pattern)
             {
                 List<float> args = new List<float>();

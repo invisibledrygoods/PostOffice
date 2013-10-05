@@ -1,0 +1,7 @@
+{ 
+  "infect": "PostOffice/Assets",
+  "with": {
+    "invisibledrygoods/GivenWhenUnity": "HEAD",
+    "invisibledrygoods/RequireUnity": "HEAD"
+  }
+}

@@ -1,4 +1,4 @@
 PostOffice
 ==========
 
-I needed a way to wait a while before receiving a message.
+I needed to wait a while before receiving a message.

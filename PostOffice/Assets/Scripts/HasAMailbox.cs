@@ -19,7 +19,7 @@ public class HasAMailbox : MonoBehaviour
     /// <param name="pattern">Letter to look for. Case and whitespace insensitive. Use __ as a fill in the blank for floats.</param>
     /// <param name="handler">Function to call if a letter is found.</param>
     /// <returns></returns>
-    public bool On(string pattern, Action<float[]> handler)
+    public bool Read(string pattern, Action<float[]> handler)
     {
         pattern = Regex.Replace(pattern, @"[^a-zA-Z0-9.-_]+", " ").ToLower();
 

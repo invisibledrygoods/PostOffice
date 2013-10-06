@@ -36,17 +36,17 @@ public class HasAMailboxTest : TestBehaviour
 
     public void ItLooksForAHelloLetter()
     {
-        returnValue = it.On("hello", _ => helloHandled++);
+        returnValue = it.Read("hello", _ => helloHandled++);
     }
 
     public void ItLooksForSomeMoney()
     {
-        returnValue = it.On(@"here is __ dollars", _ => moneyReceived = _[0]);
+        returnValue = it.Read(@"here is __ dollars", _ => moneyReceived = _[0]);
     }
 
     public void ItLooksForALetterWithoutExtraSpaces()
     {
-        returnValue = it.On(@"have some extra spaces", _ => { });
+        returnValue = it.Read(@"have some extra spaces", _ => { });
     }
 
     public void TheHelloHandlerShouldBeRun__Times(int times)

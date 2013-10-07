@@ -39,13 +39,13 @@ public class HasAMailboxTest : TestBehaviour
             
         Given("it has a mailbox")
             .And("it receives the letter 'here is 5.35 dollars'")
-            .When(@"it looks for some money")
+            .When("it looks for some money")
             .Then("the money handler should receive 5.35 dollars")
             .Because("it should be able to receive floats");
             
         Given("it has a mailbox")
             .And("it receives the letter 'here is 5 dollars'")
-            .When(@"it looks for some money")
+            .When("it looks for some money")
             .Then("the money handler should receive 5 dollars")
             .Because("it should be able to receive ints");
             
@@ -92,12 +92,12 @@ public class HasAMailboxTest : TestBehaviour
 
     public void ItLooksForSomeMoney()
     {
-        returnValue = it.Read(@"here is __ dollars", _ => moneyReceived = _[0]);
+        returnValue = it.Read("here is __ dollars", _ => moneyReceived = _[0]);
     }
 
     public void ItLooksForALetterWithoutExtraSpaces()
     {
-        returnValue = it.Read(@"have some extra spaces", _ => { });
+        returnValue = it.Read("have some extra spaces", _ => { });
     }
 
     public void TheHelloHandlerShouldBeRun__Times(int times)
